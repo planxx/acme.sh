@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>借阅管理</title>
+</head>
+<body>
+<h1>借阅管理</h1>
+<p>
+  <a href="/borrows/create">借书登记</a> |
+  <a href="/books">图书列表</a>
+</p>
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>ID</th><th>图书</th><th>借阅人</th><th>电话</th><th>借出时间</th><th>状态</th><th>操作</th>
+  </tr>
+  {volist name="borrows" id="row"}
+  <tr>
+    <td>{$row.id}</td>
+    <td>{$row.book.title|default='-'}</td>
+    <td>{$row.borrower_name}</td>
+    <td>{$row.borrower_phone}</td>
+    <td>{$row.borrowed_at}</td>
+    <td>{$row.status}</td>
+    <td>
+      {if $row.status == 'borrowed'}
+      <form action="/borrows/{$row.id}/return" method="post" style="display:inline;">
+        <button type="submit">还书</button>
+      </form>
+      {else /}
+      已归还
+      {/if}
+    </td>
+  </tr>
+  {/volist}
+</table>
+</body>
+</html>

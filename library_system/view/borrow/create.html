@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>借书登记</title>
+</head>
+<body>
+<h1>借书登记</h1>
+<p><a href="/borrows">返回借阅列表</a></p>
+<form action="/borrows" method="post">
+  <p>
+    图书：
+    <select name="book_id" required>
+      <option value="">请选择</option>
+      {volist name="books" id="book"}
+      <option value="{$book.id}">{$book.title}（库存 {$book.available_stock}）</option>
+      {/volist}
+    </select>
+  </p>
+  <p>借阅人：<input type="text" name="borrower_name" required></p>
+  <p>电话：<input type="text" name="borrower_phone"></p>
+  <button type="submit">提交借阅</button>
+</form>
+</body>
+</html>

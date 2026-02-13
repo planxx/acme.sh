@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS books (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(120) NOT NULL,
+  author VARCHAR(80) NOT NULL,
+  isbn VARCHAR(32) NOT NULL UNIQUE,
+  total_stock INT UNSIGNED NOT NULL,
+  available_stock INT UNSIGNED NOT NULL,
+  created_at DATETIME NULL,
+  updated_at DATETIME NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS borrows (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  book_id INT UNSIGNED NOT NULL,
+  borrower_name VARCHAR(60) NOT NULL,
+  borrower_phone VARCHAR(20) DEFAULT '',
+  status ENUM('borrowed', 'returned') NOT NULL DEFAULT 'borrowed',
+  borrowed_at DATETIME NOT NULL,
+  returned_at DATETIME NULL,
+  CONSTRAINT fk_borrows_book_id FOREIGN KEY (book_id) REFERENCES books(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

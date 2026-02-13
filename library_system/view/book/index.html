@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>图书列表</title>
+</head>
+<body>
+<h1>图书列表</h1>
+<p>
+  <a href="/books/create">图书入库</a> |
+  <a href="/borrows">借阅管理</a>
+</p>
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>ID</th><th>书名</th><th>作者</th><th>ISBN</th><th>总库存</th><th>可借库存</th>
+  </tr>
+  {volist name="books" id="book"}
+  <tr>
+    <td>{$book.id}</td>
+    <td>{$book.title}</td>
+    <td>{$book.author}</td>
+    <td>{$book.isbn}</td>
+    <td>{$book.total_stock}</td>
+    <td>{$book.available_stock}</td>
+  </tr>
+  {/volist}
+</table>
+</body>
+</html>
